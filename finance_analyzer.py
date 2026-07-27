@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import yfinance as yf
 import plotly.express as px
+from fpdf import FPDF
+import base64
 
 st.set_page_config(page_title="Smart Portfolio & Risk Analyzer", layout="wide")
 
@@ -46,6 +48,29 @@ if uploaded_file is not None:
 if st.sidebar.button("🗑️ Clear Portfolio"):
     st.session_state.portfolio = []
     st.rerun()
+
+# Function to generate PDF Report
+def generate_pdf(df, total_inv, total_val, total_pnl):
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", 'B', 16)
+    pdf.cell(200, 10, txt="Financial Portfolio & Risk Report", ln=True, align='C')
+    
+    pdf.set_font("Arial", '', 11)
+    pdf.cell(200, 10, txt=f"Total Investment: INR {total_inv:,.2f}", ln=True)
+    pdf.cell(200, 10, txt=f"Current Portfolio Value: INR {total_val:,.2f}", ln=True)
+    pdf.cell(200, 10, txt=f"Total Profit/Loss: INR {total_pnl:,.2f}", ln=True)
+    pdf.ln(10)
+    
+    pdf.set_font("Arial", 'B', 12)
+    pdf.cell(200, 10, txt="Stock Breakdown:", ln=True)
+    pdf.set_font("Arial", '', 10)
+    
+    for index, row in df.iterrows():
+        line = f"{row['Ticker']} | Shares: {row['Shares']} | Inv: {row['Total Investment (₹)']} | Val: {row['Current Value (₹)']} | P&L: {row['P&L (₹)']}"
+        pdf.cell(200, 8, txt=line, ln=True)
+        
+    return pdf.output(dest='S').encode('latin1')
 
 # Main Dashboard Logic
 if len(st.session_state.portfolio) > 0:
@@ -95,6 +120,16 @@ if len(st.session_state.portfolio) > 0:
     # Display Dataframe Table
     st.dataframe(df, use_container_width=True)
     
+    # PDF Download Button
+    st.subheader("📥 Download Report")
+    pdf_bytes = generate_pdf(df, total_investment, total_current_value, total_pnl)
+    st.download_button(
+        label="Download Portfolio PDF Report",
+        data=pdf_bytes,
+        file_name="Portfolio_Risk_Report.pdf",
+        mime="application/pdf"
+    )
+    
     # Visualizations & Risk Section
     col_chart1, col_chart2 = st.columns(2)
     with col_chart1:
@@ -112,4 +147,4 @@ if len(st.session_state.portfolio) > 0:
         st.info("💡 **Finance Tip:** Regularly rebalance your portfolio semi-annually to lock in profits.")
 
 else:
-    st.info("👈 Sidebar ka use karke stocks add karein ya CSV file upload karein.")
+    st.info("👈 Sidebar ka use karke stocks add karein ya CSV file upload karein.") 
