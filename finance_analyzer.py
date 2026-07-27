@@ -5,7 +5,12 @@ import plotly.express as px
 from fpdf import FPDF
 import base64
 
-st.set_page_config(page_title="Smart Portfolio & Risk Analyzer", layout="wide")
+st.set_page_config(
+    page_title="Free Stock Portfolio & Risk Analyzer | MBA Finance Tool",
+    page_icon="📈",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
 st.title("📈 Smart Financial Portfolio & Risk Analyzer")
 st.write("Apna stock portfolio manage karein, live prices track karein, aur risk analyze karein.")
