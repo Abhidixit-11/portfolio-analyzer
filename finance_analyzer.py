@@ -11,6 +11,14 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+st.markdown("""
+    <style>
+    /* GitHub icon aur toolbar hide karne ke liye */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    </style>
+""", unsafe_allow_html=True)
 
 st.title("📈 Smart Financial Portfolio & Risk Analyzer")
 st.write("Apna stock portfolio manage karein, live prices track karein, aur risk analyze karein.")
