@@ -5,40 +5,11 @@ import plotly.express as px
 from fpdf import FPDF
 import base64
 
-st.markdown("""
-    <style>
-    /* Header ko wapas laate hain taaki sidebar ka arrow dikhe */
-    header {visibility: visible !important;}
-    
-    /* Lekin header ke andar ka GitHub icon, Fork button aur deploy buttons ko hide kar dete hain */
-    .stAppToolbar {display: none !important;}
-    [data-testid="stToolbar"] {display: none !important;}
-    [data-testid="stDecoration"] {display: none !important;}
-    
-    /* Sidebar collapse hone par jo arrow top-left mein aata hai, use thoda sa prominent aur sahi jagah par laane ke liye */
-    [data-testid="collapsedControl"] {
-        display: block !important;
-        top: 10px !important;
-        left: 10px !important;
-        z-index: 999999;
-    }
-    </style>
-""", unsafe_allow_html=True)
 st.set_page_config(
-    page_title="Free Stock Portfolio & Risk Analyzer | MBA Finance Tool",
-    page_icon="📈",
+    page_title="Free Stock Portfolio & Risk Analyzer",
     layout="wide",
-    initial_sidebar_state="auto"
+    initial_sidebar_state="expanded"
 )
-st.markdown("""
-    <style>
-    /* GitHub icon aur toolbar hide karne ke liye */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: hidden;}
-    </style>
-""", unsafe_allow_html=True)
-
 st.title("📈 Smart Financial Portfolio & Risk Analyzer")
 st.write("Apna stock portfolio manage karein, live prices track karein, aur risk analyze karein.")
 
