@@ -5,11 +5,19 @@ import plotly.express as px
 from fpdf import FPDF
 import base64
 
+st.markdown("""
+    <style>
+    /* Sirf GitHub/Three-dot menu aur footer hide karega, sidebar collapse arrow ko nahi chhedega */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: visible !important;}
+    </style>
+""", unsafe_allow_html=True)
 st.set_page_config(
     page_title="Free Stock Portfolio & Risk Analyzer | MBA Finance Tool",
     page_icon="📈",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="auto"
 )
 st.markdown("""
     <style>
