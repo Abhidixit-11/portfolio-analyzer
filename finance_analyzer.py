@@ -7,12 +7,21 @@ import base64
 
 st.markdown("""
     <style>
-    /* Streamlit ka top header / toolbar, Fork button aur GitHub icon hide karne ke liye */
-    header {visibility: hidden !important;}
+    /* Header ko wapas laate hain taaki sidebar ka arrow dikhe */
+    header {visibility: visible !important;}
     
-    /* Agar header hide karne se arrow chala jaye, toh sirf toolbar ke specific elements ko target karne ke liye yeh use karein: */
-    [data-testid="stToolbar"] {visibility: hidden !important;}
-    [data-testid="stDecoration"] {visibility: hidden !important;}
+    /* Lekin header ke andar ka GitHub icon, Fork button aur deploy buttons ko hide kar dete hain */
+    .stAppToolbar {display: none !important;}
+    [data-testid="stToolbar"] {display: none !important;}
+    [data-testid="stDecoration"] {display: none !important;}
+    
+    /* Sidebar collapse hone par jo arrow top-left mein aata hai, use thoda sa prominent aur sahi jagah par laane ke liye */
+    [data-testid="collapsedControl"] {
+        display: block !important;
+        top: 10px !important;
+        left: 10px !important;
+        z-index: 999999;
+    }
     </style>
 """, unsafe_allow_html=True)
 st.set_page_config(
