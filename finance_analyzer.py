@@ -7,10 +7,12 @@ import base64
 
 st.markdown("""
     <style>
-    /* Sirf GitHub/Three-dot menu aur footer hide karega, sidebar collapse arrow ko nahi chhedega */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    header {visibility: visible !important;}
+    /* Streamlit ka top header / toolbar, Fork button aur GitHub icon hide karne ke liye */
+    header {visibility: hidden !important;}
+    
+    /* Agar header hide karne se arrow chala jaye, toh sirf toolbar ke specific elements ko target karne ke liye yeh use karein: */
+    [data-testid="stToolbar"] {visibility: hidden !important;}
+    [data-testid="stDecoration"] {visibility: hidden !important;}
     </style>
 """, unsafe_allow_html=True)
 st.set_page_config(
